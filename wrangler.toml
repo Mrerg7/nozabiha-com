@@ -1,11 +1,17 @@
 name = "nozabiha-com"
 main = "src/worker.ts"
 compatibility_date = "2026-11-05"
-workers_dev = true
+# Disable *.workers.dev so crawlers cannot treat the preview host as a
+# redirecting / duplicate alternate of the custom domain.
+workers_dev = false
 
 [assets]
 directory = "./dist"
 binding = "ASSETS"
+# Worker must run first so /index.html aliases and www/http collapse before
+# Assets can emit temporary trailing-slash 307s that GSC flags.
 run_worker_first = true
 not_found_handling = "404-page"
+# Keep directory URLs for the homepage; the Worker intercepts alias paths
+# first so same-host /index.html is a 200, not a redirect.
 html_handling = "force-trailing-slash"

@@ -1,2 +1,4 @@
-/index.html  /  301
-/index.html/ /  301
+# Intentionally empty.
+# /index.html and /index are served as 200 homepage aliases by src/worker.ts
+# (with an apex canonical) so Google Search Console does not report them as
+# "Page with redirect". www/http host consolidation is also handled there.
